@@ -1,0 +1,59 @@
+﻿<Window x:Class="WpfScheduler.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        xmlns:local="clr-namespace:WpfScheduler"
+        xmlns:skinmanager ="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
+        skinmanager:SfSkinManager.VisualStyle="MaterialLight"
+         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen" Height="600" Width="950" >
+
+    <Window.DataContext>
+        <local:SchedulerViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <local:MonthCellTemplateSelector x:Key="monthCellTemplateSelector"/>
+        <DataTemplate x:Key="monthCellTemplate">
+            <Label Content="{Binding DateText}" 
+                   Foreground="{Binding Foreground}" 
+                   HorizontalContentAlignment="Center"/>
+        </DataTemplate>
+        <DataTemplate x:Key="monthAppointmentTemplate">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition Height="0.5*"/>
+                </Grid.RowDefinitions>
+                <Label Content="{Binding DateText}"
+                   Foreground="{Binding Foreground}" 
+                   HorizontalContentAlignment="Center"
+                   Grid.Row="0"/>
+                <Label Content="{Binding AppointmentCount}"
+                   Foreground="Red"  
+                   HorizontalContentAlignment="Center"                    
+                    Grid.Row="1"/>
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <syncfusion:SfScheduler x:Name="Schedule"
+                            ViewType="Month" 
+                            ItemsSource="{Binding Appointments}">
+            <syncfusion:SfScheduler.MonthViewSettings>
+                <syncfusion:MonthViewSettings AppointmentDisplayMode="None" 
+                                              MonthCellTemplateSelector="{StaticResource monthCellTemplateSelector}">
+                </syncfusion:MonthViewSettings>
+            </syncfusion:SfScheduler.MonthViewSettings>
+            <syncfusion:SfScheduler.AppointmentMapping>
+                <syncfusion:AppointmentMapping StartTime="From"
+                                            EndTime="To"
+                                            Subject="EventName"
+                                            AppointmentBackground="Background"
+                                            IsAllDay="IsAllDay"/>
+            </syncfusion:SfScheduler.AppointmentMapping>
+        </syncfusion:SfScheduler>
+    </Grid>
+</Window>
