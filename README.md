@@ -1,2 +1,1 @@
-# customize-month-cell-with-appointment-count-scheduler-wpf
-How to customize the month cell with appointment count in the WPF Scheduler (Calendar)
+**[View document in Syncfusion WPF Knowledge base](https://www.syncfusion.com/kb/12668/how-to-customize-the-month-cell-with-appointment-count-in-the-wpf-scheduler-calendar)**
